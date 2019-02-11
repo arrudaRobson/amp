@@ -1,0 +1,106 @@
+<!doctype html>
+<html amp lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <title>Hello, AMP</title>
+    <link rel="canonical" href="http://example.ampproject.org/article-metadata.html">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        "headline": "Open-source framework for publishing content",
+        "datePublished": "2015-10-07T12:02:41Z",
+        "image": [
+          "logo.jpg"
+        ]
+      }
+    </script>
+    <style amp-custom>
+        /* any custom style goes here */
+        body {
+          background-color: #595a59;
+          color: white;
+        }
+        amp-img {
+          background-color: gray;
+          border: 1px solid black;
+        }
+        .none{
+            display: none;
+        }
+        .form {
+            width: 50%;
+            float: left;
+        }
+        .img {
+            width: 50%;
+            float: right;
+        }
+    </style>
+    <script>
+        function validaCPF(cpf)
+        {
+            var numeros, digitos, soma, i, resultado, digitos_iguais;
+            digitos_iguais = 1;
+            if (cpf.length < 11)
+                return false;
+            for (i = 0; i < cpf.length - 1; i++)
+                if (cpf.charAt(i) != cpf.charAt(i + 1))
+                        {
+                        digitos_iguais = 0;
+                        break;
+                        }
+            if (!digitos_iguais)
+                {
+                numeros = cpf.substring(0,9);
+                digitos = cpf.substring(9);
+                soma = 0;
+                for (i = 10; i > 1; i--)
+                        soma += numeros.charAt(10 - i) * i;
+                resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+                if (resultado != digitos.charAt(0))
+                        return false;
+                numeros = cpf.substring(0,10);
+                soma = 0;
+                for (i = 11; i > 1; i--)
+                        soma += numeros.charAt(11 - i) * i;
+                resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+                if (resultado != digitos.charAt(1))
+                        return false;
+                return true;
+                }
+            else
+                return false;
+        }
+    </script>
+  </head>
+  <body>
+    <div class="form">
+        <h1>Pré cadastro</h1>
+        <form action="post">
+            <label>Nome:</label><br>
+            <input type="text" autofocus><br>
+            <label>E-mail:</label><br>
+            <input type="email"><br>
+            <label>CPF:</label><br>
+            <input type="number"><br>
+            <label>Aceito receber ofertas</label>
+            <input type="checkbox" checked="checked"><br>
+            <div class="none">
+                <input type="text">
+                <input type="text">
+                <input type="text">
+                <input type="text">
+                <input type="text">
+            </div>
+            <input type="button" name="" id="" value="Enviar">
+        </form>
+        <script src="https://www.google.com/recaptcha/api.js?render=6LcjepAUAAAAAHA4hN-chT6BD_TocC-uX1v8LaB0"></script>
+    </div>
+    <div class="img">
+        <amp-img src="img/cartao.png" alt="Welcome" height="400" width="800"></amp-img>
+    </div>
+  </body>
+</html>
